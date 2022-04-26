@@ -17,35 +17,38 @@ const imagesUrl = getEnv(
 const imgixDomain = getEnv("IMGIX_DOMAIN", "", String);
 const imgixSecret = getEnv("IMGIX_SECRET", "", String);
 
-const handler = new Handler();
-handler.imgix = new ImgixClient({
+const h = new Handler();
+h.imgix = new ImgixClient({
 	domain: imgixDomain,
 	secureURLToken: imgixSecret,
 });
-handler.images = await Images.fromCsv(
+h.images = await Images.fromCsv(
 	imagesUrl,
 );
 
-const router = new Router(); // deno-lint-ignore no-explicit-any
-router.get("/", handler.root as any); // deno-lint-ignore no-explicit-any
-router.get("/health", handler.health as any); // deno-lint-ignore no-explicit-any
-router.get("/share/:id", handler.share as any); // deno-lint-ignore no-explicit-any
-router.get("/id/:id", handler.original as any); // deno-lint-ignore no-explicit-any
-router.get("/id/:id/:any(.*)", handler.original as any); // deno-lint-ignore no-explicit-any
-router.get("/id/:id/:side(\\d+).:ext?", handler.serveImage as any); // deno-lint-ignore no-explicit-any
-router.get("/id/:id/:width(\\d+)/:height(\\d+).:ext?", handler.serveImage as any); // deno-lint-ignore no-explicit-any
-router.get("/seed/:seed/:side(\\d+).:ext?", handler.serveImage as any); // deno-lint-ignore no-explicit-any
-router.get("/seed/:seed/:width(\\d+)/:height(\\d+).:ext?", handler.serveImage as any); // deno-lint-ignore no-explicit-any
-router.get("/:side(\\d+).:ext?", handler.serveImage as any); // deno-lint-ignore no-explicit-any
-router.get("/:width(\\d+)/:height(\\d+).:ext?", handler.serveImage as any);
+const r = new Router(); // deno-lint-ignore no-explicit-any
+r.get("/", h.root as any); // deno-lint-ignore no-explicit-any
+r.get("/health", h.health as any); // deno-lint-ignore no-explicit-any
+r.get("/share/:id", h.share as any); // deno-lint-ignore no-explicit-any
+r.get("/id/:id", h.original as any); // deno-lint-ignore no-explicit-any
+r.get("/id/:id/:any(.*)", h.original as any); // deno-lint-ignore no-explicit-any
+r.get("/id/:id/:side(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
+r.get("/id/:id/:width(\\d+)/:height(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
+r.get("/seed/:seed/:side(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
+r.get("/seed/:seed/:width(\\d+)/:height(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
+r.get("/:side(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
+r.get("/:width(\\d+)/:height(\\d+).:ext?", h.serveImage as any);
 
 export const app = new Application({ proxy: true });
 app.use(cors);
 app.use(autoBody);
 app.use(createLimiter(hourlyLimit, 1000 * 60 * 60));
-app.use(router.allowedMethods());
-app.use(router.routes());
+app.use(r.allowedMethods());
+app.use(r.routes());
 if (import.meta.main) {
-	app.addEventListener("listen", () => console.log("listening on port:", port));
+	app.addEventListener(
+		"listen",
+		() => console.log("listening on port:", port),
+	);
 	app.listen({ port });
 }
