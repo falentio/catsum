@@ -1,4 +1,4 @@
-name: deploy
+name: ci
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: deploy
+  ci:
+    name: ci
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
