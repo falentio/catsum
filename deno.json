@@ -1,0 +1,23 @@
+{
+	"fmt": {
+		"files": {
+			"include": ["src"]
+		},
+		"options": {
+			"useTabs": true,
+			"indentWidth": 4,
+			"singleQuote": false
+		}
+	},
+	"lint": {
+		"files": {
+			"include": ["src"]
+		},
+		"rules": {
+			"tags": ["recommended"]
+		}
+	},
+	"tasks": {
+		"dev": "deno run -A --watch --no-check src/server.ts"
+	}
+}
