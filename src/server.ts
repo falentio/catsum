@@ -26,18 +26,18 @@ h.images = await Images.fromCsv(
 	imagesUrl,
 );
 
-const r = new Router(); // deno-lint-ignore no-explicit-any
-r.get("/", h.root as any); // deno-lint-ignore no-explicit-any
-r.get("/health", h.health as any); // deno-lint-ignore no-explicit-any
-r.get("/share/:id", h.share as any); // deno-lint-ignore no-explicit-any
-r.get("/id/:id", h.original as any); // deno-lint-ignore no-explicit-any
-r.get("/id/:id/:any(.*)", h.original as any); // deno-lint-ignore no-explicit-any
-r.get("/id/:id/:side(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
-r.get("/id/:id/:width(\\d+)/:height(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
-r.get("/seed/:seed/:side(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
-r.get("/seed/:seed/:width(\\d+)/:height(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
-r.get("/:side(\\d+).:ext?", h.serveImage as any); // deno-lint-ignore no-explicit-any
-r.get("/:width(\\d+)/:height(\\d+).:ext?", h.serveImage as any);
+const r = new Router();
+r.get("/", h.root);
+r.get("/health", h.health);
+r.get("/share/:id", h.share);
+r.get("/id/:id", h.original);
+r.get("/id/:id/:any(.*)", h.original);
+r.get("/id/:id/:side(\\d+).:ext?", h.serveImage);
+r.get("/id/:id/:width(\\d+)/:height(\\d+).:ext?", h.serveImage);
+r.get("/seed/:seed/:side(\\d+).:ext?", h.serveImage);
+r.get("/seed/:seed/:width(\\d+)/:height(\\d+).:ext?", h.serveImage);
+r.get("/:side(\\d+).:ext?", h.serveImage);
+r.get("/:width(\\d+)/:height(\\d+).:ext?", h.serveImage);
 
 export const app = new Application({ proxy: true });
 app.use(cors);

@@ -1,9 +1,7 @@
 import type { RouterContext } from "./deps.ts";
-import { autoBind, ImgixClient } from "./deps.ts";
+import { autoBind, Context, ImgixClient } from "./deps.ts";
 import { Images } from "./images.ts";
 import { createXorshift } from "./xorshift.ts";
-
-type Ctx = RouterContext<"">;
 
 export class Handler {
 	imgix!: ImgixClient;
@@ -12,16 +10,19 @@ export class Handler {
 		autoBind(this);
 	}
 
-	root(ctx: Ctx) {
+	root(_ctx: Context) {
+		const ctx = _ctx as RouterContext<"">;
 		ctx.response.headers.set("cache-control", "public, max-age=7200");
 		ctx.response.redirect("https://github.com/falentio/saestu");
 	}
 
-	health(ctx: Ctx) {
+	health(_ctx: Context) {
+		const ctx = _ctx as RouterContext<"">;
 		ctx.response.body = "ok";
 	}
 
-	serveImage(ctx: Ctx) {
+	serveImage(_ctx: Context) {
+		const ctx = _ctx as RouterContext<"">;
 		const params = {
 			crop: "faces,entropy",
 			fit: "crop",
@@ -51,7 +52,7 @@ export class Handler {
 			params.monochrome = "929292";
 		}
 		if (q.get("blur") !== null) {
-			params.blur = q.get("blur") * 10;
+			params.blur = Number(q.get("blur")!) * 10;
 			if (params.blur > 2000) {
 				ctx.response.status = 400;
 				ctx.response.body = "blur params range is 0-20";
@@ -96,7 +97,8 @@ export class Handler {
 		ctx.response.redirect(url + "#" + img.id);
 	}
 
-	share(ctx: Ctx) {
+	share(_ctx: Context) {
+		const ctx = _ctx as RouterContext<"">;
 		const id = ctx.params.id ?? "";
 		const img = this.images.get(id);
 		if (!img) {
@@ -107,7 +109,8 @@ export class Handler {
 		ctx.response.redirect(img.shareUrl);
 	}
 
-	original(ctx: Ctx) {
+	original(_ctx: Context) {
+		const ctx = _ctx as RouterContext<"">;
 		const id = ctx.params.id ?? "";
 		const img = this.images.get(id);
 		if (!img) {

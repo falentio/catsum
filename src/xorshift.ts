@@ -9,8 +9,8 @@ const MAX = -1 >>> 0;
 
 export function createXorshift(seed: string) {
 	let state = seed.length;
-	for (const i in seed) {
-		state ^= seed.charCodeAt(i);
+	for (const i of seed) {
+		state ^= i.charCodeAt(0);
 		state = xorshift(state);
 	}
 	return () => {

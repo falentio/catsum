@@ -9,7 +9,7 @@ export function createLimiter(
 			[k: string]: number;
 		};
 	};
-	return (ctx: Context, next: () => Promise<void>) => {
+	return async (ctx: Context, next: () => Promise<unknown>) => {
 		const ip = ctx.request.ip;
 		pool[ip] ??= {};
 		pool[ip].last ??= Date.now();
@@ -25,24 +25,25 @@ export function createLimiter(
 			return;
 		}
 
-		return next();
+		await next();
 	};
 }
 
-export function cors(ctx: Context, next: () => Promise<void>) {
+export async function cors(ctx: Context, next: () => Promise<unknown>) {
 	const h = ctx.response.headers;
 	h.set("Access-Control-Allow-Origin", "*");
 	h.set("Access-Control-Max-Age", "86400");
 	h.set("Access-Control-Allow-Methods", "GET");
+	h.set("Kangen", "Abel");
 	if (ctx.request.method === "OPTIONS") {
 		ctx.response.status = 204;
 		return;
 	}
-	return next();
+	await next();
 }
 
-export function autoBody(ctx, next) {
+export async function autoBody(ctx: Context, next: () => Promise<unknown>) {
 	return next().then((_) => {
 		ctx.response.body ||= STATUS_TEXT.get(ctx.response.status);
-	});
+	}) as Promise<void>;
 }
