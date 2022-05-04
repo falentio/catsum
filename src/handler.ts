@@ -10,14 +10,16 @@ export class Handler {
 		autoBind(this);
 	}
 
-	root(_ctx: Context) {
-		const ctx = _ctx as RouterContext<"">;
+	async root(ctx: Context) {
 		ctx.response.headers.set("cache-control", "public, max-age=7200");
-		ctx.response.redirect("https://github.com/falentio/saestu");
+		ctx.response.headers.set("content-type", "text/html");
+		const res = await fetch(
+			new URL("../public/index.html", import.meta.url).href
+		)
+		ctx.response.body = res.body
 	}
 
-	health(_ctx: Context) {
-		const ctx = _ctx as RouterContext<"">;
+	health(ctx: Context) {
 		ctx.response.body = "ok";
 	}
 

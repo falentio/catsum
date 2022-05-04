@@ -18,6 +18,6 @@
 		}
 	},
 	"tasks": {
-		"dev": "deno run -A --watch --no-check src/server.ts"
+		"dev": "deno run -A --watch=src --no-check src/server.ts"
 	}
 }
