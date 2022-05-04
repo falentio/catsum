@@ -15,7 +15,7 @@ export function createXorshift(seed: string) {
 	}
 	return () => {
 		let i = state = xorshift(state);
-		i >>>= 0
+		i >>>= 0;
 		return i / MAX;
 	};
 }
