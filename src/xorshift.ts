@@ -10,11 +10,12 @@ const MAX = -1 >>> 0;
 export function createXorshift(seed: string) {
 	let state = seed.length;
 	for (const i of seed) {
-		state ^= i.charCodeAt(0);
+		state ^= i.charCodeAt(0) ** 2;
 		state = xorshift(state);
 	}
 	return () => {
-		const i = state = xorshift(state) >>> 0;
+		let i = state = xorshift(state);
+		i >>>= 0
 		return i / MAX;
 	};
 }
