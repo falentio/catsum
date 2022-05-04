@@ -26,7 +26,7 @@
 	</style>
 </head>
 <body class="container container-tablet" v-scope="{
-	hostname: [window.location.hostname, window.location.port].join(':'),
+	hostname: [window.location.hostname, window.location.port || undefined].join(':'),
 }">
 	<h1> Saestu </h1>
 	<div> saestu is picsum.photo clone, but it has less complexity, saestu writen in Typescript, and runed using Deno not Nodejs. Saestu not using database to store image information, only using single csv file.</div>
