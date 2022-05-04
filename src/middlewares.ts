@@ -42,7 +42,7 @@ export async function cors(ctx: Context, next: () => Promise<unknown>) {
 	await next();
 }
 
-export async function autoBody(ctx: Context, next: () => Promise<unknown>) {
+export function autoBody(ctx: Context, next: () => Promise<unknown>) {
 	return next().then((_) => {
 		ctx.response.body ||= STATUS_TEXT.get(ctx.response.status);
 	}) as Promise<void>;
