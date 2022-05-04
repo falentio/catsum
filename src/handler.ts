@@ -165,4 +165,16 @@ export class Handler {
 		ctx.response.headers.set("cache-control", "public, max-age=7200");
 		ctx.response.redirect(img.downloadUrl);
 	}
+
+	info(_ctx: Context) {
+		const ctx = _ctx as RouterContext<"">;
+		const id = ctx.params.id ?? "";
+		const img = this.images.get(id);
+		if (!img) {
+			ctx.response.status = 404;
+			return;
+		}
+		ctx.response.headers.set("cache-control", "public, max-age=7200");
+		ctx.response.body = img;
+	}
 }

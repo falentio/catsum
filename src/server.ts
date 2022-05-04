@@ -32,7 +32,7 @@ r.get("/list", h.list);
 r.get("/health", h.health);
 r.get("/share/:id", h.share);
 r.get("/id/:id", h.original);
-r.get("/id/:id/:any(.*)", h.original);
+r.get("/id/:id/info", h.info);
 r.get("/id/:id/:side(\\d+).:ext?", h.serveImage);
 r.get("/id/:id/:width(\\d+)/:height(\\d+).:ext?", h.serveImage);
 r.get("/seed/:seed/:side(\\d+).:ext?", h.serveImage);
