@@ -21,6 +21,17 @@ export class Handler {
 		ctx.response.body = "ok";
 	}
 
+	list(ctx: Context) {
+		const s = ctx.request.url.searchParams
+		const limit = +(s.get("limit") ?? 1000)
+		const page = +(s.get("page") ?? 1)
+		const offset = limit * (page - 1)
+		const until = offset + limit
+		ctx.response.headers.set("cache-control", "public, max-age=86400")
+		ctx.response.body = this.images.list
+			.slice(offset, until)
+	}
+
 	serveImage(_ctx: Context) {
 		const ctx = _ctx as RouterContext<"">;
 		const params = {
@@ -73,6 +84,40 @@ export class Handler {
 			default:
 				params.fm = "jpg";
 				break;
+		}
+
+		if (ctx.params.seeds) {
+			const h = ctx.request.headers;
+			ctx.params.seed = "";
+			for (const i of ctx.params.seeds.split(",")) {
+				switch (i) {
+					case "ip":
+						ctx.params.seed += ctx.request.ip;
+						break;
+					case "referer":
+					case "user-agent":
+					case "origin":
+						ctx.params.seed += h.get(i) ?? i;
+						break;
+					case "day":
+						ctx.params.seed += new Date().getDay().toString();
+						break;
+					case "date":
+						ctx.params.seed += new Date().getDate().toString();
+						break;
+					case "month":
+						ctx.params.seed += new Date().getMonth().toString();
+						break;
+					case "":
+						break;
+					default:
+						ctx.response.status = 400;
+						ctx.response.body = "invalid seed-with param: " + i;
+						return;
+				}
+				ctx.params.seed += ";";
+			}
+			console.log(ctx.params.seed);
 		}
 
 		const seed = ctx.params.seed;
