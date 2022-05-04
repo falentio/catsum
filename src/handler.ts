@@ -22,14 +22,14 @@ export class Handler {
 	}
 
 	list(ctx: Context) {
-		const s = ctx.request.url.searchParams
-		const limit = +(s.get("limit") ?? 1000)
-		const page = +(s.get("page") ?? 1)
-		const offset = limit * (page - 1)
-		const until = offset + limit
-		ctx.response.headers.set("cache-control", "public, max-age=86400")
+		const s = ctx.request.url.searchParams;
+		const limit = +(s.get("limit") ?? 1000);
+		const page = +(s.get("page") ?? 1);
+		const offset = limit * (page - 1);
+		const until = offset + limit;
+		ctx.response.headers.set("cache-control", "public, max-age=86400");
 		ctx.response.body = this.images.list
-			.slice(offset, until)
+			.slice(offset, until);
 	}
 
 	serveImage(_ctx: Context) {

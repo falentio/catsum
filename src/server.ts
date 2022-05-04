@@ -28,7 +28,7 @@ h.images = await Images.fromCsv(
 
 const r = new Router();
 r.get("/", h.root);
-r.get("/list", h.list)
+r.get("/list", h.list);
 r.get("/health", h.health);
 r.get("/share/:id", h.share);
 r.get("/id/:id", h.original);
