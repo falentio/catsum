@@ -117,7 +117,6 @@ export class Handler {
 				}
 				ctx.params.seed += ";";
 			}
-			console.log(ctx.params.seed);
 		}
 
 		const seed = ctx.params.seed;
