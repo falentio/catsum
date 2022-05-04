@@ -14,9 +14,9 @@ export class Handler {
 		ctx.response.headers.set("cache-control", "public, max-age=7200");
 		ctx.response.headers.set("content-type", "text/html");
 		const res = await fetch(
-			new URL("../public/index.html", import.meta.url).href
-		)
-		ctx.response.body = res.body
+			new URL("../public/index.html", import.meta.url).href,
+		);
+		ctx.response.body = res.body;
 	}
 
 	health(ctx: Context) {
