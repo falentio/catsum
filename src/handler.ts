@@ -98,8 +98,7 @@ export class Handler {
 						break;
 					case "referer":
 					case "user-agent":
-					case "origin":
-						ctx.params.seed += h.get(i) ?? i;
+						ctx.params.seed += h.get(i) ?? "";
 						break;
 					case "day":
 						ctx.params.seed += new Date().getDay().toString();

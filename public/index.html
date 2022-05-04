@@ -51,37 +51,37 @@
 		<li>
 			<div> square photo: </div>
 			<pre><code><a href="/200">https://hostname/200</a></code></pre>
-			<img src="/seed-with/origin,user-agent,date/200" width="200" height="200">
+			<img src="/seed-with/referer,user-agent,date/200" width="200" height="200">
 		</li>
 		<li>
 			<div> fixed length photo: </div>
 			<div> width: 300 </div>
 			<div> height: 200 </div>
 			<pre><code><a href="/300/200">https://hostname/300/200</a></code></pre>
-			<img src="/seed-with/origin,user-agent,date/300/200" width="300" height="200">
+			<img src="/seed-with/referer,user-agent,date/300/200" width="300" height="200">
 		</li>
 		<li>
 			<div> grayscaled photo: </div>
 			<pre><code><a href="/300/200">https://hostname/300/200?grayscale</a></code></pre>
-			<img src="/seed-with/origin,user-agent,date/300/200?grayscale" width="300" height="200">
+			<img src="/seed-with/referer,user-agent,date/300/200?grayscale" width="300" height="200">
 		</li>
 		<li>
 			<div> blured photo: </div>
 			<div> blur range is from 1 to 20 </div>
 			<pre><code><a href="/300/200">https://hostname/300/200?blur=2</a></code></pre>
-			<img src="/seed-with/origin,user-agent,date/300/200?blur=2" width="300" height="200">
+			<img src="/seed-with/referer,user-agent,date/300/200?blur=2" width="300" height="200">
 		</li>
 		<li>
 			<div> fixed format photo: </div>
 			<div> default is jpg, can be either avif, png, jpg, or webp </div>
 			<pre><code><a href="/300/200.png">https://hostname/300/200.png</a></code></pre>
-			<img src="/seed-with/origin,user-agent,date/300/200.png" width="300" height="200">
+			<img src="/seed-with/referer,user-agent,date/300/200.png" width="300" height="200">
 		</li>
 		<li>
 			<div> fixed format photo: </div>
 			<div> default is jpg, can be either avif, png, jpg, or webp </div>
 			<pre><code><a href="/300/200.png">https://hostname/300/200.png</a></code></pre>
-			<img src="/seed-with/origin,user-agent,date/300/200.png" width="300" height="200">
+			<img src="/seed-with/referer,user-agent,date/300/200.png" width="300" height="200">
 		</li>
 		<li>
 			<div> using seed: </div>
@@ -95,9 +95,9 @@
 		</li>
 		<li>
 			<div> using dynamic seed: </div>
-			<div> acceptable params is neither of user-agent, ip, date, day, month, origin, and referer</div>
-			<pre><code><a href="/seed-with/origin,user-agent/300/200.png">https://hostname/seed-with/origin,user-agent/300/200.png</a></code></pre>
-			<img src="/seed-with/origin,user-agent/300/200.png" width="300" height="200">
+			<div> acceptable params is neither of user-agent, ip, date, day, month, and referer</div>
+			<pre><code><a href="/seed-with/referer,user-agent/300/200.png">https://hostname/seed-with/referer,user-agent/300/200.png</a></code></pre>
+			<img src="/seed-with/referer,user-agent/300/200.png" width="300" height="200">
 		</li>
 		<li>
 			<div> list: </div>
