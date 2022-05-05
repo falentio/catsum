@@ -36,7 +36,7 @@
 	}
 }">
 	<h1> Saestu </h1>
-	<div> saestu is picsum.photo clone, but it has less complexity, saestu writen in Typescript, and runed using Deno not Nodejs. Saestu not using database to store image information, only using single csv file.</div>
+	<div> saestu is picsum.photo clone, but it has less complexity, saestu writen in Typescript, and Deno. Saestu not using database to store image information, only using single csv file.</div>
 	<div class="text-align-center"> --- </div>
 	<div> Swipe from right to left if you wanna see some sample image.</div>
 	<div class="img-collections">
@@ -72,20 +72,14 @@
 		</li>
 		<li>
 			<div> grayscaled photo: </div>
-			<pre><code><a href="/300/200">{{resolveUrl("/300/200?grayscale")}}</a></code></pre>
+			<pre><code><a href="/300/200?grayscale">{{resolveUrl("/300/200?grayscale")}}</a></code></pre>
 			<img src="/seed-with/referer,user-agent,date/300/200?grayscale" width="300" height="200">
 		</li>
 		<li>
 			<div> blured photo: </div>
 			<div> blur range is from 1 to 20 </div>
-			<pre><code><a href="/300/200">{{resolveUrl("/300/200?blur=2")}}</a></code></pre>
+			<pre><code><a href="/300/200?blur=2">{{resolveUrl("/300/200?blur=2")}}</a></code></pre>
 			<img src="/seed-with/referer,user-agent,date/300/200?blur=2" width="300" height="200">
-		</li>
-		<li>
-			<div> fixed format photo: </div>
-			<div> default is jpg, can be either avif, png, jpg, or webp </div>
-			<pre><code><a href="/300/200.png">{{resolveUrl("/300/200.png")}}</a></code></pre>
-			<img src="/seed-with/referer,user-agent,date/300/200.png" width="300" height="200">
 		</li>
 		<li>
 			<div> fixed format photo: </div>
