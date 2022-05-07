@@ -4,6 +4,7 @@ const xorshift = (n: number) => {
 	n ^= n << 5;
 	return n;
 };
+const u8 = 2 ** 8
 
 export function createXorshift(seed: string) {
 	let state = seed.length ** 2;
@@ -13,6 +14,6 @@ export function createXorshift(seed: string) {
 	}
 	return () => {
 		state = xorshift(state);
-		return (state >>> 0) / (2 ** 8);
+		return ((state >>> 0) % u8) / u8;
 	};
 }
