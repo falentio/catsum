@@ -5,8 +5,6 @@ const xorshift = (n: number) => {
 	return n;
 };
 
-const MAX = -1 >>> 0;
-
 export function createXorshift(seed: string) {
 	let state = seed.length ** 2;
 	for (const i of seed) {
@@ -15,6 +13,6 @@ export function createXorshift(seed: string) {
 	}
 	return () => {
 		state = xorshift(state);
-		return (state >>> 0) / MAX;
+		return (state >>> 0) / (2 ** 8);
 	};
 }
