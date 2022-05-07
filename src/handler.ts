@@ -66,7 +66,7 @@ export class Handler {
 		}
 		if (q.get("blur") !== null) {
 			params.blur = Number(q.get("blur")!) * 10;
-			if (params.blur > 2000) {
+			if (params.blur > 2000 || isNaN(params.blur) || params.blur < 0) {
 				ctx.response.status = 400;
 				ctx.response.body = "blur params range is 0-20";
 				return;
