@@ -137,6 +137,9 @@ export class Handler {
 		if (seed || ctx.params.id) {
 			h.set("cache-control", "public, max-age=86400");
 		}
+		if (ctx.params.seeds) {
+			h.set("cache-control", "private, max-age=3600");
+		}
 
 		const url = this.imgix.buildURL(img.downloadUrl, params);
 		ctx.response.redirect(url + "#" + img.id);
