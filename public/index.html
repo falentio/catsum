@@ -28,16 +28,32 @@
 		.img-collections > img:first-child {
 			margin: 0;
 		}
+
+		.randomizer {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.randomizer > * {
+			margin: 1rem auto 0;
+		}
+
+		.invisible {
+			opacity: 0;
+		}
 	</style>
 </head>
-<body class="container container-tablet" v-scope="{
+<body style="padding-bottom: 4rem;" class="container container-tablet" v-scope="{
 	randomStr: Math.random().toString(16).slice(2, 10),
+	randomize() {
+		this.randomStr = Math.random().toString(16).slice(2, 10);
+	},
 	resolveUrl(url) {
 		return new URL(url, window.location.href).href
 	},
 	catsum(rest) {
 		return `/seed/${this.randomStr}${rest}`
-	}
+	},
 }">
 	<h1> Catsum </h1>
 	<div> By: Kevin Falentio. </div>
@@ -46,23 +62,12 @@
 		<a href="https://github.com/falentio/catsum"> github </a>
 	</div>
 	<div class="text-align-center"> --- </div>
-	<div> Swipe from right to left if you wanna see some sample image.</div>
-	<div class="img-collections">
-		<img width="300" height="300" src="/id/1/300">
-		<img width="300" height="300" src="/id/2/300">
-		<img width="300" height="300" src="/id/3/300">
-		<img width="300" height="300" src="/id/4/300">
-		<img width="300" height="300" src="/id/5/300">
-		<img width="300" height="300" src="/id/6/300">
-		<img width="300" height="300" src="/id/7/300">
-		<img width="300" height="300" src="/id/8/300">
-		<img width="300" height="300" src="/id/9/300">
-		<img width="300" height="300" src="/id/10/300">
-		<img width="300" height="300" src="/id/11/300">
-		<img width="300" height="300" src="/id/12/300">
-		<img width="300" height="300" src="/id/13/300">
-		<img width="300" height="300" src="/id/14/300">
-		<img width="300" height="300" src="/id/15/300">
+	<div class="randomizer">
+		<div>
+			Current seed: {{randomStr}}
+			<input type="text" name="randomStr" v-model="randomStr">
+		</div>
+		<button @click="randomize"> Randomize </button>
 	</div>
 	<div> Endpoints: </div>
 	<ul>
@@ -121,5 +126,23 @@
 			<pre><code><a href="/list?limit=100&page=2">{{resolveUrl("/list?limit=100&page=2")}}</a></code></pre>
 		</li>
 	</ul>
+	<div> Swipe from right to left if you wanna see some sample image.</div>
+	<div class="img-collections">
+		<img width="300" height="300" src="/id/1/300">
+		<img width="300" height="300" src="/id/2/300">
+		<img width="300" height="300" src="/id/3/300">
+		<img width="300" height="300" src="/id/4/300">
+		<img width="300" height="300" src="/id/5/300">
+		<img width="300" height="300" src="/id/6/300">
+		<img width="300" height="300" src="/id/7/300">
+		<img width="300" height="300" src="/id/8/300">
+		<img width="300" height="300" src="/id/9/300">
+		<img width="300" height="300" src="/id/10/300">
+		<img width="300" height="300" src="/id/11/300">
+		<img width="300" height="300" src="/id/12/300">
+		<img width="300" height="300" src="/id/13/300">
+		<img width="300" height="300" src="/id/14/300">
+		<img width="300" height="300" src="/id/15/300">
+	</div>
 </body>
 </html>
