@@ -140,9 +140,16 @@ export class Handler {
 		if (ctx.params.seeds) {
 			h.set("cache-control", "private, max-age=3600");
 		}
-
 		const url = this.imgix.buildURL(img.downloadUrl, params);
 		ctx.response.redirect(url + "#" + img.id);
+		console.log(JSON.stringify({
+			id,
+			seed,
+			ua: ctx.request.headers.get("user-agent"),
+			date: new Date().toLocaleString(),
+			unix: Date.now(),
+			params,
+		}))
 	}
 
 	share(_ctx: Context) {

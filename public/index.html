@@ -45,7 +45,12 @@
 </head>
 <body style="padding-bottom: 4rem;" class="container container-tablet" v-scope="{
 	randomStr: Math.random().toString(16).slice(2, 10),
+	disableRandom: false,
 	randomize() {
+		this.disableRandom = true;
+		setTimeout(() => {
+			this.disableRandom = false;
+		}, 1000)
 		this.randomStr = Math.random().toString(16).slice(2, 10);
 	},
 	resolveUrl(url) {
@@ -67,7 +72,7 @@
 			Current seed: {{randomStr}}
 			<input type="text" name="randomStr" v-model="randomStr">
 		</div>
-		<button @click="randomize"> Randomize </button>
+		<button @click="randomize" :disabled="disableRandom"> Randomize </button>
 	</div>
 	<div> Endpoints: </div>
 	<ul>
