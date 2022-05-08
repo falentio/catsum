@@ -149,7 +149,7 @@ export class Handler {
 			date: new Date().toLocaleString(),
 			unix: Date.now(),
 			params,
-		}))
+		}));
 	}
 
 	share(_ctx: Context) {
