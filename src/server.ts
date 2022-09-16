@@ -8,7 +8,7 @@ function getEnv<T>(name: string, def: string, cb: (s: string) => T): T {
 }
 
 const port = getEnv("PORT", "8080", Number);
-const hourlyLimit = getEnv("HOURLY_LIMIT", "200", Number);
+const hourlyLimit = getEnv("HOURLY_LIMIT", "600", Number);
 const imagesUrl = getEnv(
 	"IMAGES_URL",
 	new URL("../albums/cats.csv", import.meta.url).toString(),

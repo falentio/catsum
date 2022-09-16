@@ -41,12 +41,48 @@
 		.invisible {
 			opacity: 0;
 		}
+
+		.scup {
+			animation: scaleup 1s ease-in-out 0s ;
+		}
+
+		@keyframes scaleup {
+			0% {
+				opacity: 0;
+				transform: scale(0);
+			}
+			80% {
+				transform: scale(1.1);
+			}
+			100% {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
 	</style>
+	<script type="text/javascript" defer>
+		function init() {
+			const imgs = document.querySelectorAll("li > img")
+			for (const img of imgs) {
+				img.addEventListener("load", function () {
+					img.classList.add("scup")
+				})
+			}
+
+			window.removeScupFromImgs = function () {
+				for (const img of imgs) {
+					img.classList.remove("scup")
+				}
+			}
+		}
+		document.addEventListener("DOMContentLoaded", init)
+	</script>
 </head>
 <body style="padding-bottom: 4rem;" class="container container-tablet" v-scope="{
 	randomStr: Math.random().toString(16).slice(2, 10),
 	disableRandom: false,
 	randomize() {
+		window.removeScupFromImgs()
 		this.disableRandom = true;
 		setTimeout(() => {
 			this.disableRandom = false;
