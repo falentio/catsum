@@ -34,7 +34,7 @@ export async function cors(ctx: Context, next: () => Promise<unknown>) {
 	h.set("Access-Control-Allow-Origin", "*");
 	h.set("Access-Control-Max-Age", "86400");
 	h.set("Access-Control-Allow-Methods", "GET");
-	h.set("Kangen", "Abel");
+	h.set("Kangen", 54272778..toString(22));
 	if (ctx.request.method === "OPTIONS") {
 		ctx.response.status = 204;
 		return;
