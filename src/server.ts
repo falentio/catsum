@@ -8,7 +8,6 @@ function getEnv<T>(name: string, def: string, cb: (s: string) => T): T {
 }
 
 const port = getEnv("PORT", "8080", Number);
-const hourlyLimit = getEnv("HOURLY_LIMIT", "3600", Number);
 const imagesUrl = getEnv(
 	"IMAGES_URL",
 	new URL("../albums/cats.csv", import.meta.url).toString(),
@@ -45,7 +44,6 @@ r.get("/:width(\\d+)/:height(\\d+).:ext?", h.serveImage);
 export const app = new Application({ proxy: true });
 app.use(cors);
 app.use(autoBody);
-app.use(createLimiter(hourlyLimit, 1000 * 60 * 60));
 app.use(r.allowedMethods());
 app.use(r.routes());
 if (import.meta.main) {
