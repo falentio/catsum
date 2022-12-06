@@ -1,5 +1,5 @@
 import "https://deno.land/std@0.136.0/dotenv/load.ts";
-export type { RouterContext } from "https://deno.land/x/oak@v10.5.1/mod.ts";
+export type { RouterContext } from "https://deno.land/x/oak@v11/mod.ts";
 export {
 	Application,
 	Context,
