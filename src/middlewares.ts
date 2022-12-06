@@ -30,7 +30,6 @@ export function createLimiter(
 }
 
 export async function cors(ctx: Context, next: () => Promise<unknown>) {
-	await next();
 	const h = ctx.response.headers;
 	h.set("Access-Control-Allow-Origin", "*");
 	h.set("Access-Control-Max-Age", "86400");
@@ -40,6 +39,7 @@ export async function cors(ctx: Context, next: () => Promise<unknown>) {
 		ctx.response.status = 204;
 		return;
 	}
+	await next();
 }
 
 export function autoBody(ctx: Context, next: () => Promise<unknown>) {
